@@ -1,4 +1,4 @@
-# adriel-tech.github.iogh-pages-minima-starter
+# adriel-tech.github.io
 
 Potentially useful tech guides that I have created. 
 
@@ -12,4 +12,4 @@ Theme:
 [minima](https://github.com/jekyll/minima)
 
 Tips:
-[gh pages minima starter](https://github.com/jsanz/gh-pages-minima-starter)
+[gh-pages-minima-starter](https://github.com/jsanz/gh-pages-minima-starter)
