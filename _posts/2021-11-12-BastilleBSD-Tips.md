@@ -24,7 +24,7 @@ examples to improve your own setup.
 The flow of my bastille system is as such:
 
 1. Dial in the default-config template for a consistent base jail setup.
-pre install your important programs and settings so everything is as you like.
+Install your important programs and settings so everything is as you like.
 
 2. Copy a template, modify template, build a jail, apply template.
 
@@ -39,17 +39,17 @@ update the template.
 
 Other stuff:
 
-- I mount my '.dotfiles' for jails in a shared folder. This allows a simple way to update userland
+1. I mount my '.dotfiles' for jails in a shared folder. This allows a simple way to update userland
 configs across all jails. I use [Xstow](https://www.freshports.org/sysutils/xstow/) to manage all 
 of my '.dotfiles', this is specific to my personal setup, you can easily integrate your own
 '.dotfiles' system. You could also bypass this whole idea and place your jail '.dotfiles' in the 'default-config'
 template. That is simple but if you are always tweaking your '.dotfiles' and setup, this allows your latest
 changes to be updated across all your jails, keeping your tui consistent across your jails and host.
 
-- I mount my letsencrypt SSL certs and share them with other jails that need them. One jail manages the
+2. I mount my letsencrypt SSL certs and share them with other jails that need them. One jail manages the
 certs, the other jails have a read only mount.
 
-- For dynamic jails I keep my data on a separate zfs datapool(tank) this separates my data from the
+3. For dynamic jails I keep my data on a separate zfs datapool(tank) this separates my data from the
 ephemeral jails. If I use Gitea as an example, I have a dataset on my host for the Gitea config and database.
 located at '/tank/Services/Gitea'. 
 
@@ -83,9 +83,9 @@ destroy the jail and the dataset, continue using your current setup.
 
 Some service configs are static, we don't worry about creating host mounts
 if the jails purpose does not require dynamic data. Such as a jail to monitor
-(DDNS)[https://www.cloudflare.com/learning/dns/glossary/dynamic-dns/].
+(DDNS)[https://www.cloudflare.com/learning/dns/glossary/dynamic-dns/] .
 
-- All of my jails share /var/cache/pkg with the host. This saves space and can speed up rebuilding
+4. All of my jails share /var/cache/pkg with the host. This saves space and can speed up rebuilding
 jails. If you are testing bastille templates multiple times, any package you recently installed
 on the host or another jail will be cached. This saves internet bandwidth and more importantly,
 rebuild speed!
