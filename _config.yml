@@ -18,7 +18,6 @@ header_pages:
   - _pages/frontpage.md
   - _pages/about.md
   - _pages/archive.md
-  - _pages/github.md
 
 show_excerpts: true
 

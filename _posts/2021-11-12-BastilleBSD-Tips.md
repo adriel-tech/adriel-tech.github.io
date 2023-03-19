@@ -30,8 +30,7 @@ For dynamic jails I keep my data on a separate zfs datapool(tank) this separates
 ephemeral jails. If I use Gitea as an example, I have a dataset on my host for the Gitea config and database.
 located at '/tank/Services/Gitea'. 
 
-"tree -L 2 /tank/Services/Gitea"
-~~~
+~~~ tree -L 2 /tank/Services/Gitea
 /tank/Services/Gitea
 ├── Config
 │   └── conf
