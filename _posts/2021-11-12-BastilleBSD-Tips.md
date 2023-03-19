@@ -6,9 +6,9 @@ categories: [BastilleBSD, FreeBSD13]
 
 These are a few tricks I use for [BastilleBSD](https://bastillebsd.org/) on FreeBSD 13. This document assumes you have a home server on your lan, you want to use IPv6, your IPv4 and IPv6 are both dynamic addresses. You have installed BastilleBSD and are using ZFS. This setup can easily be used for public servers or laptops, use my examples to improve your own setup.
 
-[1. Preamble information](#Preamble-information)
+[1. Preamble information](#preamble-information)
 
-[2. Setup settings](#setup-settings)
+[2. Host settings](#host-settings)
 
 [3. Templates](#templates)
 
@@ -75,9 +75,7 @@ CMD mkdir -p /var/cache/pkg
 MOUNT /var/cache/pkg var/cache/pkg nullfs rw 0 0
 ~~~
 
-# Setup settings
-
-## On the Host
+# Host settings
 
 I always force resolve.conf to use my routers static IPv4 address and IPv6 unique local address (ULA).
 I will copy this file from the host to each of my jails using my 'default-config' template. When using VNET 
@@ -95,7 +93,7 @@ name_servers="10.10.10.1 fd00:1234::1"
 # Templates
 
 The templates related to this post are located at: 
-[https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips](https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips) My 'default-configs' changes some default FreeBSD settings to reduce cpu workload and writes to disk.
+[https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips](https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips). The 'default-configs' changes some default FreeBSD settings to reduce cpu workload and writes to disk.
 
 "tree -L 2 default-configs/etc"
 ~~~
