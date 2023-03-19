@@ -1,19 +1,15 @@
 # adriel-tech.github.io
 
-Potentially useful guides that I have created.
+Potentially useful tech guides that I have created. 
 
-Link:
+Live website:
 [adriel-tech.github.io](https://adriel-tech.github.io)
 
-## Website built using:
+Website built using:
 [jekyll](https://github.com/jekyll/jekyll)
 
 Theme:
 [minima](https://github.com/jekyll/minima)
 
 Tips:
-(https://github.com/jsanz/gh-pages-minima-starter)
-
-
-
-[![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
+[gh pages minima starter](https://github.com/jsanz/gh-pages-minima-starter)
