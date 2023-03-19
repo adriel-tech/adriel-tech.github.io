@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "BastilleBSD Tips"
-categories: BastilleBSD
+title: "FreeBSD 13 BastilleBSD Tips"
+categories: [BastilleBSD, FreeBSD13]
 ---
 
 These are a few tricks I use for my [BastilleBSD](https://bastillebsd.org/) setups.
@@ -19,8 +19,6 @@ test test test test test test test
 test test test test test test test
 test test test test test test test
 
-
-
 test test test test test test test
 test test test test test test test
 test test test test test test test
@@ -34,9 +32,7 @@ Stuff info
 
 
 
-/etc/resolvconf.conf
-
-~~~
+/etc/resolvconf.conf ~~~
 name_servers="10.10.10.1 fd00:1234::1"
 ~~~
 

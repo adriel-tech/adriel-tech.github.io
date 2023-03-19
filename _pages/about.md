@@ -9,8 +9,8 @@ forums or web searches. This website is a place I will share some of the
 knowledge I have gained, I hope it will be useful to someone else.
 
 
-## Website built using: 
+Website built using: 
 [jekyll](https://github.com/jekyll/jekyll)
 
-## Theme:
+Theme:
 [minima](https://github.com/jekyll/minima)
