@@ -7,7 +7,7 @@ categories: [BastilleBSD, FreeBSD13]
 These are a few tricks I use for [BastilleBSD](https://bastillebsd.org/) on FreeBSD 13. This document assumes you
 have a home server on your lan, you want to use IPv6, your IPv4 and IPv6 are both dynamic addresses. You have
 installed BastilleBSD and are using ZFS. This setup can easily be used for public servers or laptops, use my
-examples to improve your own setup.
+examples to improve your own setup. IPv6 is easy to disable if you don't need it.
 
 [1. Preamble](#preamble)
 
@@ -54,13 +54,13 @@ jails. If you are testing bastille templates multiple times, any package you rec
 on the host or another jail will be cached. This saves internet bandwidth and more importantly,
 rebuild speed!
 
-"cat default-configs/"Bastillefile"
-~~~
-CMD printf '####\n#### Setup: Mounts and Permissions\n####\n'
-# share pkg cache between host/jails
-CMD mkdir -p /var/cache/pkg
-MOUNT /var/cache/pkg var/cache/pkg nullfs rw 0 0
-~~~
+  "cat default-configs/"Bastillefile"
+  ~~~
+  CMD printf '####\n#### Setup: Mounts and Permissions\n####\n'
+  # share pkg cache between host/jails
+  CMD mkdir -p /var/cache/pkg
+  MOUNT /var/cache/pkg var/cache/pkg nullfs rw 0 0
+  ~~~
 
 - For dynamic jails I keep my data on a separate zfs datapool(tank) this separates my data from the
 ephemeral jails. If I use Gitea as an example, I have a dataset on my host for the Gitea config and database.
@@ -109,7 +109,7 @@ This could possibly be unique to my ISP and network setup, but I don't see any d
 I am from Canada and I know Germans have similar problems with dynamic IPv6 workarounds. Below is an example
 /etc/resolvconf.conf, change the IP addresses to something suitable for your setup.
 
-"/etc/resolvconf.conf" 
+"cat /etc/resolvconf.conf" 
 ~~~
 name_servers="10.10.10.1 fd00:1234::1"
 ~~~
