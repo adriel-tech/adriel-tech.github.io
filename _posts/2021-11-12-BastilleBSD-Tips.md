@@ -30,7 +30,8 @@ For dynamic jails I keep my data on a separate zfs datapool(tank) this separates
 ephemeral jails. If I use Gitea as an example, I have a dataset on my host for the Gitea config and database.
 located at '/tank/Services/Gitea'. 
 
-tree -L 2 /tank/Services/Gitea ~~~
+tree -L 2 /tank/Services/Gitea 
+~~~
 /tank/Services/Gitea
 ├── Config
 │   └── conf
@@ -43,7 +44,8 @@ tree -L 2 /tank/Services/Gitea ~~~
 
 I will mount those directories into my Gitea jail in my Gitea template.
 
-cat gitea/Bastillefile ~~~
+cat gitea/Bastillefile
+~~~
 CMD printf '####\n#### Setup: Mounts and Permissions\n####\n'
 CMD mkdir -p /usr/local/etc/gitea
 MOUNT /tank/Services/Gitea/Config usr/local/etc/gitea nullfs rw 0 0
@@ -65,7 +67,8 @@ jails. If you are testing bastille templates multiple times, any package you rec
 on the host or another jail will be cached. This saves internet bandwidth and more importantly, 
 rebuild speed!
 
-cat default-configs/Bastillefile ~~~
+cat default-configs/Bastillefile
+~~~
 CMD printf '####\n#### Setup: Mounts and Permissions\n####\n'
 # share pkg cache between host/jails
 CMD mkdir -p /var/cache/pkg
@@ -96,7 +99,8 @@ The templates related to this post are located at:
 
 My 'default-configs' changes some default FreeBSD settings to reduce workload and writes to disk.
 
-tree -L 2 default-configs/etc ~~~
+tree -L 2 default-configs/etc 
+~~~
 default-configs/etc/
 ├── newsyslog.conf
 ├── newsyslog.conf.d
