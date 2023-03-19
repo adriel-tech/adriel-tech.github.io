@@ -1,9 +1,8 @@
 ---
 permalink: /
-layout: null
+layout: home
 title: Home
-list_title: My latest blog posts
+list_title: Latest posts ⬇️
 ---
 
 ![placeholder](/assets/images/frontpage.png){:.centered}
-
