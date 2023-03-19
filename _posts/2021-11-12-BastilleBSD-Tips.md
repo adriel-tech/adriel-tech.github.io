@@ -10,13 +10,34 @@ installed BastilleBSD and are using ZFS. This setup can easily be used for publi
 examples to improve your own setup.
 
 [1. Preamble](#preamble)
+
 [2. Host settings](#host-settings)
+
 [3. Templates](#templates)
+
 [4. Building jails](#building-jails)
 
 ---
 
 # Preamble
+
+The flow of my bastille system is as such:
+
+1. Dial in the default-config template for a consistent base jail setup.
+pre install your important programs and settings so everything is as you like.
+
+2. Copy a template, modify template, build a jail, apply template.
+
+3. Enter new jail, fine tune the setup and modify it to your liking.
+
+4. Once everything is good, copy the configs out of the jail and into your
+template. Rebuild jail with new configs, did everything work? Good we are done.
+
+5. Future tweaks and updates can be ported back to the Bastille template and jail can be easily
+rebuilt or cloned. I like using jails this way, I can pop in a live jail, tweak and test it, then
+update the template.
+
+Other stuff:
 
 - I mount my '.dotfiles' for jails in a shared folder. This allows a simple way to update userland
 configs across all jails. I use [Xstow](https://www.freshports.org/sysutils/xstow/) to manage all 
@@ -58,15 +79,15 @@ MOUNT /tank/Services/Gitea/Database var/db/gitea nullfs rw 0 0
 Now I can rebuild my gitea jail fresh and keep my config and data(Repos) across rebuilds.
 I could clone the config and data, create a test gitea jail using the cloned dataset
 and experiment with a new version, using a copy of my data. If there are issues, just
-destroy the jail and the dataset, continue using your current setup. 
+destroy the jail and the dataset, continue using your current setup.
 
 Some service configs are static, we don't worry about creating host mounts
 if the jails purpose does not require dynamic data. Such as a jail to monitor
 (DDNS)[https://www.cloudflare.com/learning/dns/glossary/dynamic-dns/].
 
 - All of my jails share /var/cache/pkg with the host. This saves space and can speed up rebuilding
-jails. If you are testing bastille templates multiple times, any package you recently installed 
-on the host or another jail will be cached. This saves internet bandwidth and more importantly, 
+jails. If you are testing bastille templates multiple times, any package you recently installed
+on the host or another jail will be cached. This saves internet bandwidth and more importantly,
 rebuild speed!
 
 "cat default-configs/"Bastillefile"
@@ -82,12 +103,11 @@ MOUNT /var/cache/pkg var/cache/pkg nullfs rw 0 0
 ## /etc/resolveconf.conf
 
 I always force resolve.conf to use my routers static IPv4 address and IPv6 unique local address (ULA).
-I will copy this file from the host to each of my jails using my 'default-config' template. When using VNET 
+I will copy this file from the host to each of my jails using my 'default-config' template. When using VNET
 jails, this will make sure your jails don't lose IPv6 dns resolving when your IPv6 address is changed by your ISP.
 This could possibly be unique to my ISP and network setup, but I don't see any downsides of doing this.
-I am from Canada and I know Germans have similar problems with dynamic IPv6 work arounds.
-
-Below is an example /etc/resolvconf.conf, change the IP addresses to something suitable for your setup.
+I am from Canada and I know Germans have similar problems with dynamic IPv6 workarounds. Below is an example
+/etc/resolvconf.conf, change the IP addresses to something suitable for your setup.
 
 "/etc/resolvconf.conf" 
 ~~~
@@ -107,7 +127,7 @@ git clone https://github.com/YOURDOTS/.dotfiles.git /zroot/usr/local/jails/share
 # Templates
 
 The templates related to this post are located at: 
-[https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips](https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips). 
+[https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips](https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips).
 The 'default-configs' template changes some default FreeBSD settings to reduce cpu workload and writes to disk.
 
 "tree -L 2 default-configs/etc"
@@ -172,7 +192,6 @@ for nginx. I have a template with the layout I like for Bastillefiles, we'll cop
 cp -R _template/ nginx-TEST
 ~~~
 
-
 'cat nginx-TEST/Bastillefile'
 ~~~
 CMD printf '####\n#### Setup: Defaults\n####\n'
@@ -187,10 +206,10 @@ CMD printf '####\n#### Setup: SYSRC\n####\n'
 CMD printf '####\n#### Install Programs\n####\n'
 
 
-CMD printf '####\n#### Setup: Pre start commands\n####\n'
-
-
 CMD printf '####\n#### Setup: Overlay etc\n####\n'
+
+
+CMD printf '####\n#### Setup: Pre start commands\n####\n'
 
 
 CMD printf '####\n#### Start Services\n####\n'
@@ -239,12 +258,30 @@ CMD printf '####\n#### Setup: Post commands\n####\n'
 
 # Building jails
 
-We are going to build out jail now, we'll create the jail with Bastille, then activate the templates.
+We are going to build out a jail now, we'll create the jail with Bastille, then activate the templates.
 This is considered a new project that needs some other setup. Once the jail is built and setup
 we will pop inside and customize what we want, play with it  a bit. Once we are happy, we can copy 
 any specific config changes out of the jail and into our nginx-TEST/usr/local/etc folder.
 We can then build a new jail with the modified configs already setup. Assuming we got everything working
 then this template is completed. I use my jails as work spaces also and port my changes back into
 my templates, and document them in the README in each template. This way I can view them on gitea/github,
-documenting your Bastillefile and putting notes in a README are advised. 
+documenting your Bastillefile and putting notes in a README are advised.
 
+Create VNET jail:
+~~~
+bastille create -V nginx-TEST 13.1-RELEASE 10.10.10.42 em0
+~~~
+
+Apply template to new jail:
+~~~
+bastille template nginx-TEST FreeBSD13-BastilleBSD-Tips/nginx-TEST
+~~~
+
+Assuming there are no problems, we can enter the jail and play around.
+Bastille does not handle errors at all really. If I have problems with the template propagating, I
+read over the error, try to fix it, then nuke the jail and rebuild it, reapplying a template is not
+something you should do.
+
+~~~
+bastille console nginx-TEST
+~~~
