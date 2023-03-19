@@ -121,7 +121,7 @@ zfs create -p zroot/usr/local/jails/share
 ~~~
 
 ~~~
-git clone https://github.com/YOURDOTS/.dotfiles.git /zroot/usr/local/jails/share/dotfiles
+git clone https://github.com/adriel-tech/stow-example /zroot/usr/local/jails/share/dotfiles
 ~~~
 
 # Templates
@@ -177,7 +177,6 @@ MOUNT /zroot/usr/local/jails/share/dotfiles root/.dotfiles nullfs ro 0 0
 
 # Setup configs
 CMD xstow -d /root/.dotfiles bin-files
-CMD xstow -d /root/.dotfiles cheat
 CMD xstow -d /root/.dotfiles git
 CMD xstow -d /root/.dotfiles nvim
 CMD xstow -d /root/.dotfiles tcsh-root
