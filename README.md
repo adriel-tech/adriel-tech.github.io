@@ -1,4 +1,4 @@
-# adriel-tech.github.io
+# adriel-tech.github.iogh-pages-minima-starter
 
 Potentially useful tech guides that I have created. 
 
