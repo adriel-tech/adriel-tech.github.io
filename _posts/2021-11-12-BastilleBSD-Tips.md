@@ -4,11 +4,11 @@ title: "FreeBSD 13 BastilleBSD Tips"
 categories: [BastilleBSD, FreeBSD13]
 ---
 
-These are a few tricks I use for [BastilleBSD](https://bastillebsd.org/) on FreeBSD 13. This document assumes you have a home server on your lan, you want to use ipv6, your ipv4 and ipv6 are both dynamic addresses. You have installed BastilleBSD and are using ZFS. This setup can easily be used for public servers or laptops, use my examples to improve your own setup.
+These are a few tricks I use for [BastilleBSD](https://bastillebsd.org/) on FreeBSD 13. This document assumes you have a home server on your lan, you want to use IPv6, your IPv4 and IPv6 are both dynamic addresses. You have installed BastilleBSD and are using ZFS. This setup can easily be used for public servers or laptops, use my examples to improve your own setup.
 
-[1. Preamble information](#Preambleinformation)
+[1. Preamble information](#Preamble-information)
 
-[2. Setup settings](#setupsettings)
+[2. Setup settings](#setup-settings)
 
 [3. Templates](#templates)
 
@@ -55,7 +55,7 @@ MOUNT /tank/Services/Gitea/Database var/db/gitea nullfs rw 0 0
 
 Now I can rebuild my gitea jail fresh and keep my config and data(Repos) across rebuilds.
 I could clone the config and data, create a test gitea jail using the cloned dataset
-and experiment with a new version, using a copy of my data. IF there are issues, you can just 
+and experiment with a new version, using a copy of my data. If there are issues, you can just 
 destroy the jail and the dataset, continue using your current setup. 
 
 Some service configs are static, we don't worry about creating host mounts
@@ -79,11 +79,11 @@ MOUNT /var/cache/pkg var/cache/pkg nullfs rw 0 0
 
 ## On the Host
 
-I always force resolve.conf to use my routers static ipv4 address and ipv6 unique local address (ULA).
+I always force resolve.conf to use my routers static IPv4 address and IPv6 unique local address (ULA).
 I will copy this file from the host to each of my jails using my 'default-config' template. When using VNET 
-jails, this will make sure your jails don't lose ipv6 dns resolving when your ipv6 address is changed by your ISP.
+jails, this will make sure your jails don't lose IPv6 dns resolving when your IPv6 address is changed by your ISP.
 This could possibly be unique to my ISP and network setup, but I don't see any downsides of doing this.
-I am from Canada and I know Germans have similar problems with dynamic ipv6 work arounds.
+I am from Canada and I know Germans have similar problems with dynamic IPv6 work arounds.
 
 Below is an example /etc/resolvconf.conf, change the IP addresses to something suitable for your setup.
 
@@ -95,10 +95,7 @@ name_servers="10.10.10.1 fd00:1234::1"
 # Templates
 
 The templates related to this post are located at: 
-[https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips](https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips)
-
-
-My 'default-configs' changes some default FreeBSD settings to reduce workload and writes to disk.
+[https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips](https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips) My 'default-configs' changes some default FreeBSD settings to reduce cpu workload and writes to disk.
 
 "tree -L 2 default-configs/etc"
 ~~~
