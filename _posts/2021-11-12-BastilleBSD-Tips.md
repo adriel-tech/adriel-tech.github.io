@@ -66,37 +66,37 @@ rebuild speed!
 ephemeral jails. If I use Gitea as an example, I have a dataset on my host for the Gitea config and database.
 located at '/tank/Services/Gitea'.
 
-"tree -L 2 /tank/Services/Gitea"
-~~~
-/tank/Services/Gitea
-├── Config
-│   └── conf
-└── Database
-    ├── data
-    ├── gitea-repositories
-    ├── gitea.db
-    └── indexers
-~~~
+  "tree -L 2 /tank/Services/Gitea"
+  ~~~
+  /tank/Services/Gitea
+  ├── Config
+  │   └── conf
+  └── Database
+      ├── data
+      ├── gitea-repositories
+      ├── gitea.db
+      └── indexers
+  ~~~
 
-I will mount those directories into my Gitea jail in my Gitea template.
+  I will mount those directories into my Gitea jail in my Gitea template.
 
-"cat gitea/Bastillefile"
-~~~
-CMD printf '####\n#### Setup: Mounts and Permissions\n####\n'
-CMD mkdir -p /usr/local/etc/gitea
-MOUNT /tank/Services/Gitea/Config usr/local/etc/gitea nullfs rw 0 0
-CMD mkdir -p /var/db/gitea
-MOUNT /tank/Services/Gitea/Database var/db/gitea nullfs rw 0 0
-~~~
+  "cat gitea/Bastillefile"
+  ~~~
+  CMD printf '####\n#### Setup: Mounts and Permissions\n####\n'
+  CMD mkdir -p /usr/local/etc/gitea
+  MOUNT /tank/Services/Gitea/Config usr/local/etc/gitea nullfs rw 0 0
+  CMD mkdir -p /var/db/gitea
+  MOUNT /tank/Services/Gitea/Database var/db/gitea nullfs rw 0 0
+  ~~~
 
-Now I can rebuild my gitea jail fresh and keep my config and data(Repos) across rebuilds.
-I could clone the config and data, create a test gitea jail using the cloned dataset
-and experiment with a new version, using a copy of my data. If there are issues, just
-destroy the jail and the dataset, continue using your current setup.
+  Now I can rebuild my gitea jail fresh and keep my config and data(Repos) across rebuilds.
+  I could clone the config and data, create a test gitea jail using the cloned dataset
+  and experiment with a new version, using a copy of my data. If there are issues, just
+  destroy the jail and the dataset, continue using your current setup.
 
-Some service configs are static, we don't worry about creating host mounts
-if the jails purpose does not require dynamic data. Such as a jail to monitor
-[DDNS](https://www.cloudflare.com/learning/dns/glossary/dynamic-dns/).
+  Some service configs are static, we don't worry about creating host mounts
+  if the jails purpose does not require dynamic data. Such as a jail to monitor
+  [DDNS](https://www.cloudflare.com/learning/dns/glossary/dynamic-dns/).
 
 # Host settings
 
