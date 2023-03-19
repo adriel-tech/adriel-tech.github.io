@@ -4,12 +4,12 @@ title: "FreeBSD 13 BastilleBSD Tips"
 categories: [BastilleBSD, FreeBSD13]
 ---
 
-# WORK IN PROGRESS
-
 These are a few tricks I use for [BastilleBSD](https://bastillebsd.org/) on FreeBSD 13. This document assumes you have a home server on your lan, you want to use ipv6, your ipv4 and ipv6 are both dynamic addresses. You have installed BastilleBSD and are using ZFS. This setup can easily be used for public servers or laptops, use my examples to improve your own setup.
 
 [1. Preamble information](#Preambleinformation)
+
 [2. Setup settings](#setupsettings)
+
 [3. Templates](#templates)
 
 # Preamble information
@@ -30,7 +30,7 @@ For dynamic jails I keep my data on a separate zfs datapool(tank) this separates
 ephemeral jails. If I use Gitea as an example, I have a dataset on my host for the Gitea config and database.
 located at '/tank/Services/Gitea'. 
 
-tree -L 2 /tank/Services/Gitea 
+"tree -L 2 /tank/Services/Gitea"
 ~~~
 /tank/Services/Gitea
 ├── Config
@@ -44,7 +44,7 @@ tree -L 2 /tank/Services/Gitea
 
 I will mount those directories into my Gitea jail in my Gitea template.
 
-cat gitea/Bastillefile
+"cat gitea/Bastillefile"
 ~~~
 CMD printf '####\n#### Setup: Mounts and Permissions\n####\n'
 CMD mkdir -p /usr/local/etc/gitea
@@ -67,7 +67,7 @@ jails. If you are testing bastille templates multiple times, any package you rec
 on the host or another jail will be cached. This saves internet bandwidth and more importantly, 
 rebuild speed!
 
-cat default-configs/Bastillefile
+"cat default-configs/"Bastillefile"
 ~~~
 CMD printf '####\n#### Setup: Mounts and Permissions\n####\n'
 # share pkg cache between host/jails
@@ -87,7 +87,8 @@ I am from Canada and I know Germans have similar problems with dynamic ipv6 work
 
 Below is an example /etc/resolvconf.conf, change the IP addresses to something suitable for your setup.
 
-/etc/resolvconf.conf ~~~
+"/etc/resolvconf.conf" 
+~~~
 name_servers="10.10.10.1 fd00:1234::1"
 ~~~
 
@@ -99,7 +100,7 @@ The templates related to this post are located at:
 
 My 'default-configs' changes some default FreeBSD settings to reduce workload and writes to disk.
 
-tree -L 2 default-configs/etc 
+"tree -L 2 default-configs/etc"
 ~~~
 default-configs/etc/
 ├── newsyslog.conf
