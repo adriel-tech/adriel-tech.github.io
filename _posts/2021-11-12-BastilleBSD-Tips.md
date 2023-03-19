@@ -156,7 +156,7 @@ might not be advisable.
 ## Install templates
 
 ~~~
-git clone https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips /usr/local/bastille/templates/FreeBSD13-BastilleBSD-Tips
+bastille bootstrap https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips
 ~~~
 
 ~~~
