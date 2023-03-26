@@ -8,7 +8,7 @@ These are a few tricks I use for [BastilleBSD](https://bastillebsd.org/) on Free
 have a pc/server on your home lan, you want to use IPv6 which has dynamic addresses and BastilleBSD
 is installed and setup. I write this to share my ideas with others familiar with FreeBSD, nothing is to be used without
 modification. BastilleBSD can be simple or difficult depending on what you want to do or HOW you do it.
-I have found that most examples for BastilleBSD are very basic, that is why I am writting this guide.
+I have found that most examples for BastilleBSD are very basic, that is why I am writing this guide.
 
 [1. Preamble](#preamble)
 
@@ -297,7 +297,7 @@ CMD printf '####\n#### Start Services\n####\n'
 CMD printf '####\n#### Setup: Post commands\n####\n'
 ~~~
 
-Now let us build up our nginx-TEST-setup Bastillefile. I want this jail to be a VNET jail with IPv6 and a
+Now let's build up our nginx-TEST-setup Bastillefile. I want this jail to be a VNET jail with IPv6 and a
 default PF firewall enabled. I include the 'default-configs' of course, also 2 'snippet' Bastillefiles
 that will enable ipv6 and pf with a basic pf.conf. 
 
@@ -396,8 +396,8 @@ mkdir -p nginx-TEST-final/usr/local/etc
 Copy modded nginx-TEST-setup /etc/pf.conf. goaccess config is not something I need to mess with
 often, it can be copied into the template also.
 ~~~
-cp /usr/local/bastille/jails/nginx-TEST-setup/root/etc/pf.conf etc/
-cp -R /usr/local/bastille/jails/nginx-TEST-setup/root/usr/local/etc/goaccess/ usr/local/etc/goaccess
+cp /usr/local/bastille/jails/nginx-TEST-setup/root/etc/pf.conf nginx-TEST-final/etc/
+cp -R /usr/local/bastille/jails/nginx-TEST-setup/root/usr/local/etc/goaccess/ nginx-TEST-final/usr/local/etc/goaccess
 ~~~
 
 Edit the README in nginx-TEST-final with any info/notes you want too. Now lets make a new jail and try out the new
@@ -434,11 +434,11 @@ bastille template nginx-TEST-final adriel-tech/FreeBSD13-BastilleBSD-Tips/nginx-
 
 # Conclusion and thoughts
 
-I don't usually create 2 templates '-setup' and '-final', I used them as a tool to explain things better.
+I don't usually create 2 templates '-setup' and '-final', I used them as a tool to explain things easier.
 Integrate your own snippets for simple generic things to save time. You could disable syslogd and cron for your jails,
 which makes sense for some and not others. Make a snippet and add it to the jails that don't need it. Once you
 create your own defaults and build up 1-2 services using what you learned from this post, you'll
-understand the power of it. 
+understand the power of it.
 
 I hope you learned from this post and generated some ideas that will improve your
 own setup, please share them with the community!
