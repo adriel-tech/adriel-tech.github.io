@@ -143,10 +143,78 @@ bastille bootstrap https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips
 ~~~
 
 lets check out the 'default-configs' template. This is where we will setup general settings
-for our jails.
+for all of our jails.
 ~~~
 cd /usr/local/bastille/templates/adriel-tech/FreeBSD13-BastilleBSD-Tips
 ~~~
+
+"cat default-configs/Bastillefile"
+~~~
+# Helps with VNET DNS resolving especially ipv6. Without it my VNET jails
+# end up with empty resolve.conf on reboot.
+CP /etc/resolvconf.conf etc/resolvconf.conf
+
+CMD printf '####\n#### Setup: Mounts and Permissions\n####\n'
+# share pkg cache between host/jails
+CMD mkdir -p /var/cache/pkg
+MOUNT /var/cache/pkg var/cache/pkg nullfs rw 0 0
+# Setup home directory
+CMD mkdir /root/.config
+CMD mkdir /root/.dotfiles
+CMD mkdir -p /root/.local/bin
+CMD mkdir -p /root/.local/share
+# Mount shared dotfiles
+MOUNT /usr/local/jails/share/dotfiles root/.dotfiles nullfs ro 0 0
+
+CMD printf '####\n#### Setup: SYSRC\n####\n'
+# Tweak bastille's rc.conf
+CMD sysrc sendmail_enable="NONE"
+CMD dumpdev="NO"
+
+CMD printf '####\n#### Install Programs\n####\n'
+# Set PKG to latest, create FreeBSD.conf.bak
+CMD sed -i .bak "s/quarterly/latest/g" /etc/pkg/FreeBSD.conf
+# Install programs
+PKG git-lite htop neovim tree xstow
+
+# Set Jail password, better than nothing
+CMD echo "CHANGEME" | pw usermod root -h 0
+
+CMD rm /root/.cshrc
+CMD rm /root/.shrc
+CMD rm /root/.k5login
+CMD rm /root/.login
+CMD rm /root/.profile
+
+# Setup configs
+CMD xstow -d /root/.dotfiles bin-files
+CMD xstow -d /root/.dotfiles git
+CMD xstow -d /root/.dotfiles nvim
+CMD xstow -d /root/.dotfiles tcsh-root
+
+CMD printf '####\n#### Setup: Overlay etc\n####\n'
+OVERLAY etc
+
+CMD printf '####\n#### Nuke default logs\n####\n'
+CMD rm -rfv /var/log/*
+
+CMD printf '####\n#### Setup: Post commands\n####\n'
+# Date the Jails creation
+CMD touch /root/"Created_`date +"%m_%d_%Y"`"
+~~~
+
+What did we see?
+- hosts resolvconf.conf copied to jail.
+- mount host /var/cache/pkg.
+- root user home directory setup + dots #1.
+- sysrc tweaks.
+- pkg set to use latest instead of quarterly (latest packages).
+- install must have programs: "git-lite htop neovim tree xstow".
+- give root a default password "CHANGEME".
+- root user home directory setup + dots #2.
+- overlay my custom /etc/ files to overwrite FreeBSD defaults.
+- nuke the logs.
+- create a file in /root so I know the creation date of the jail.
 
 My 'default-configs' template changes some default FreeBSD settings to reduce cpu workload and writes to disk.
 
@@ -173,10 +241,9 @@ You may add your own FreeBSD base /etc/ modifications, place your tweaked files 
 Consider the changes you make here, they could have security implications. Changing syslog.conf as I have
 might not be advisable.
 
-Take a look through default-configs, Bastillefile and /etc folder and tweak to your liking. Every template
-you create from this point forward will include default-configs. Add your must have programs in this template
-"git-lite htop neovim tree xstow" etc. If you are not using xstow or dotfiles, you can delete that section 
-from the Bastillefile.
+Take a look through default-configs and add/remove things to your hearts content. Every template
+you create from this point forward will include default-configs. If you are not using xstow or dotfiles, you 
+can delete that section from the Bastillefile.
 
 ~~~
 # Setup home directory
@@ -259,7 +326,7 @@ SYSRC nginx_enable="YES"
 CMD printf '####\n#### Install Programs\n####\n'
 PKG goaccess nginx-devel py39-certbot
 
-CMD printf '####\n#### Setup: Overlay etc\n####\n'
+#CMD printf '####\n#### Setup: Overlay etc\n####\n'
 #OVERLAY etc
 
 CMD printf '####\n#### Setup: Pre start commands\n####\n'
@@ -268,12 +335,12 @@ CMD nginx -t
 CMD printf '####\n#### Start Services\n####\n'
 SERVICE nginx start
 
-CMD printf '####\n#### Setup: Post commands\n####\n'
+#CMD printf '####\n#### Setup: Post commands\n####\n'
 ~~~
 
 We are almost ready to build this jail up and modify it to our liking.
-Before we do that, on the host we will make the directories we want to keep when
-the jail is destroyed; letsencrypt, www, nginx config.
+Before we do that, on the host we will make the directories needed for our 
+persistent data; letsencrypt, www, nginx config.
 ~~~
 mkdir -p /usr/local/jails/share/ule-letsencrypt
 mkdir -p /usr/local/jails/nginx-TEST/ul-www
@@ -282,22 +349,17 @@ mkdir -p /usr/local/jails/nginx-TEST/ule-nginx
 
 # Building jails
 
-We'll create the jail with Bastille, then activate the templates. This is considered a new project that needs 
-some other setup. Once the jail is built and setup we will pop inside and customize what we want, play with
-it a bit. Once we are happy, we can copy any specific config changes out of the jail and into our next
-template nginx-TEST-final/usr/local/etc folder. We can then build a new jail with the modified configs already
-setup. Assuming we got everything working then this template is completed. I use my jails as work spaces also
-and port my changes back into my templates, and document them in the README in each template. This way I can
-view them on gitea/github, documenting your Bastillefile and putting notes in a README are advised.
+We'll create the jail with Bastille, then activate the templates. This is considered a new project that needs
+some other setup. Once the jail is built and setup we will pop inside, customize what we want and play a bit.
 
 Create VNET jail:
 ~~~
-bastille create -V nginx-TEST 13.1-RELEASE 10.10.10.42 em0
+bastille create -V nginx-TEST-setup 13.1-RELEASE 10.10.10.42 em0
 ~~~
 
 Apply template to new jail:
 ~~~
-bastille template nginx-TEST adriel-tech/FreeBSD13-BastilleBSD-Tips/nginx-TEST-setup
+bastille template nginx-TEST-setup adriel-tech/FreeBSD13-BastilleBSD-Tips/nginx-TEST-setup
 ~~~
 
 Assuming there are no problems, we can enter the jail and play around.
@@ -306,7 +368,7 @@ read over the error, try to fix it, then nuke the jail and rebuild it, reapplyin
 something you should do.
 
 ~~~
-bastille console nginx-TEST
+bastille console nginx-TEST-setup
 ~~~
 
 At this point I will get letsencrypt running, tweak up my nginx config, modifiy my /etc/pf.conf to my liking.
@@ -322,16 +384,15 @@ cp -R nginx-TEST-setup/ nginx-TEST-final
 
 create folders for static configs
 ~~~
-cd nginx-TEST-final
-mkdir etc
-mkdir -p usr/local/etc
+mkdir nginx-TEST-final/etc
+mkdir -p nginx-TEST-final/usr/local/etc
 ~~~
 
-I modded nginx-TESTs /etc/pf.conf, we'll copy it into the template. I initiated and tweaked goaccess config which
-is not something I need to mess with often, it can be in the template.
+Copy modded nginx-TEST-setup /etc/pf.conf. goaccess config is not something I need to mess with
+often, it can be copied into the template also.
 ~~~
-cp /usr/local/bastille/jails/nginx-TEST/root/etc/pf.conf etc/
-cp -R /usr/local/bastille/jails/nginx-TEST/root/usr/local/etc/goaccess/ usr/local/etc/goaccess
+cp /usr/local/bastille/jails/nginx-TEST-setup/root/etc/pf.conf etc/
+cp -R /usr/local/bastille/jails/nginx-TEST-setup/root/usr/local/etc/goaccess/ usr/local/etc/goaccess
 ~~~
 
 Edit the README in nginx-TEST-final with any info/notes you want too. Now lets make a new jail and try out the new
@@ -348,7 +409,7 @@ bastille template nginx-TEST-final adriel-tech/FreeBSD13-BastilleBSD-Tips/nginx-
 ~~~
 
 If your template fails, you'll need to troubleshoot it, stop, destroy jail then start again.
-You kept the original nginx-TEST jail, you can also compare your work with it.
+You kept the original nginx-TEST-setup jail, you can also compare your work with it.
 Assuming the template works without issue, you are done.
 
 You can update the jail in the future from the host by running:
