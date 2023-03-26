@@ -101,8 +101,8 @@ located at '/tank/Services/Gitea'.
   destroy the jail and the dataset, continue using your current setup.
 
   Some service configs are static, we don't worry about creating host mounts
-  if the jails purpose does not require dynamic data. Such as a jail to monitor
-  [DDNS](https://www.cloudflare.com/learning/dns/glossary/dynamic-dns/).
+  if the jails purpose does not require persistent data. Such as a jail to monitor
+  [DDNS](https://www.cloudflare.com/learning/dns/glossary/dynamic-dns/) or a jail for testing.
 
 # Host settings
 
@@ -134,7 +134,21 @@ git clone https://github.com/adriel-tech/stow-example /usr/local/jails/share/dot
 
 The templates related to this post are located at: 
 [https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips](https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips).
-The 'default-configs' template changes some default FreeBSD settings to reduce cpu workload and writes to disk.
+
+
+## Install templates
+
+~~~
+bastille bootstrap https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips
+~~~
+
+lets check out the 'default-configs' template. This is where we will setup general settings
+for our jails.
+~~~
+cd /usr/local/bastille/templates/adriel-tech/FreeBSD13-BastilleBSD-Tips
+~~~
+
+My 'default-configs' template changes some default FreeBSD settings to reduce cpu workload and writes to disk.
 
 "tree -L 2 default-configs/etc"
 ~~~
@@ -157,20 +171,12 @@ default-configs/etc/
 
 You may add your own FreeBSD base /etc/ modifications, place your tweaked files in default-configs/etc.
 Consider the changes you make here, they could have security implications. Changing syslog.conf as I have
-might not be advisable. 
+might not be advisable.
 
-## Install templates
-
-~~~
-bastille bootstrap https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips
-~~~
-
-~~~
-cd /usr/local/bastille/templates/adriel-tech/FreeBSD13-BastilleBSD-Tips
-~~~
-
-Take a look through default-configs, Bastillefile and /etc folder and tweak to your liking, if you are not
-using xstow or dotfiles, you can delete that section from the Bastillefile.
+Take a look through default-configs, Bastillefile and /etc folder and tweak to your liking. Every template
+you create from this point forward will include default-configs. Add your must have programs in this template
+"git-lite htop neovim tree xstow" etc. If you are not using xstow or dotfiles, you can delete that section 
+from the Bastillefile.
 
 ~~~
 # Setup home directory
@@ -188,16 +194,16 @@ CMD xstow -d /root/.dotfiles nvim
 CMD xstow -d /root/.dotfiles tcsh-root
 ~~~
 
-## Using default-configs
+## Using default-configs in another template
 
-default configs will be included in every Bastillefile we create from now on. Let's make a new Bastille file
-for nginx. I have a template with the layout I like for Bastillefiles, we'll copy it and modify it.
+Let's make a new Bastille file for nginx, goaccess and letsencrypt to see what we can do. I created a template with 
+the layout I like for Bastillefiles, we'll copy it and modify it.
 
 ~~~
 cp -R _template/ nginx-TEST-setup
 ~~~
 
-'cat nginx-TEST/Bastillefile'
+'cat nginx-TEST-setup/Bastillefile'
 ~~~
 CMD printf '####\n#### Setup: Defaults\n####\n'
 INCLUDE /usr/local/bastille/templates/adriel-tech/FreeBSD13-BastilleBSD-Tips/default-configs
@@ -223,8 +229,8 @@ CMD printf '####\n#### Start Services\n####\n'
 CMD printf '####\n#### Setup: Post commands\n####\n'
 ~~~
 
-Now we will build up our nginx Bastillefile. I want this jail to be a VNET jail
-with IPv6 and a default PF firewall enabled. I include the 'default-configs' of course, also 2 'snippet' Bastillefiles
+Now let us build up our nginx-TEST-setup Bastillefile. I want this jail to be a VNET jail with IPv6 and a
+default PF firewall enabled. I include the 'default-configs' of course, also 2 'snippet' Bastillefiles
 that will enable ipv6 and enable pf with a basic pf.conf. 
 
 ~~~
@@ -276,14 +282,13 @@ mkdir -p /usr/local/jails/nginx-TEST/ule-nginx
 
 # Building jails
 
-We are going to build out a jail now, we'll create the jail with Bastille, then activate the templates.
-This is considered a new project that needs some other setup. Once the jail is built and setup
-we will pop inside and customize what we want, play with it a bit. Once we are happy, we can copy 
-any specific config changes out of the jail and into our next template nginx-TEST-final/usr/local/etc folder.
-We can then build a new jail with the modified configs already setup. Assuming we got everything working
-then this template is completed. I use my jails as work spaces also and port my changes back into
-my templates, and document them in the README in each template. This way I can view them on gitea/github,
-documenting your Bastillefile and putting notes in a README are advised.
+We'll create the jail with Bastille, then activate the templates. This is considered a new project that needs 
+some other setup. Once the jail is built and setup we will pop inside and customize what we want, play with
+it a bit. Once we are happy, we can copy any specific config changes out of the jail and into our next
+template nginx-TEST-final/usr/local/etc folder. We can then build a new jail with the modified configs already
+setup. Assuming we got everything working then this template is completed. I use my jails as work spaces also
+and port my changes back into my templates, and document them in the README in each template. This way I can
+view them on gitea/github, documenting your Bastillefile and putting notes in a README are advised.
 
 Create VNET jail:
 ~~~
@@ -334,12 +339,12 @@ config, we made no mistakes and this is all going to work the first time!
 
 Create VNET jail:
 ~~~
-bastille create -V nginx 13.1-RELEASE 10.10.10.43 em0
+bastille create -V nginx-TEST-final 13.1-RELEASE 10.10.10.43 em0
 ~~~
 
 Apply template to new jail:
 ~~~
-bastille template nginx adriel-tech/FreeBSD13-BastilleBSD-Tips/nginx-TEST-final
+bastille template nginx-TEST-final adriel-tech/FreeBSD13-BastilleBSD-Tips/nginx-TEST-final
 ~~~
 
 If your template fails, you'll need to troubleshoot it, stop, destroy jail then start again.
@@ -348,15 +353,15 @@ Assuming the template works without issue, you are done.
 
 You can update the jail in the future from the host by running:
 ~~~
-bastille cmd nginx pkg upgrade -y
+bastille cmd nginx-TEST-final pkg upgrade -y
 ~~~
 
 You can also rebuild the jail, our letsencrypt , nginx and www files will mount back in:
 ~~~
 bastille stop nginx
 bastille destroy nginx
-bastille create -V nginx 13.1-RELEASE 10.10.10.43 em0
-bastille template nginx adriel-tech/FreeBSD13-BastilleBSD-Tips/nginx-TEST-final
+bastille create -V nginx-TEST-final 13.1-RELEASE 10.10.10.43 em0
+bastille template nginx-TEST-final adriel-tech/FreeBSD13-BastilleBSD-Tips/nginx-TEST-final
 ~~~
 
 # Conclusion and thoughts
