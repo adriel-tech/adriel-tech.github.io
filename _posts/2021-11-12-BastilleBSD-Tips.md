@@ -348,6 +348,8 @@ mkdir -p /usr/local/jails/nginx-TEST/ule-nginx
 
 # Building jails
 
+## nginx-TEST-setup
+
 Create the jail with Bastille, then activate the templates. This is considered a new project that needs
 some other setup. Once the jail is built and setup we will pop inside, customize what we want and play a bit.
 
@@ -376,6 +378,8 @@ I made this decision earlier since I have done this already (letsencrypt, www, n
 
 Exit out of the jail and now we on the host. I have a basic nginx template, I'll make a copy of it
 and add in my working configs from the current jail.
+
+## nginx-TEST-final
 
 ~~~
 cp -R nginx-TEST-setup/ nginx-TEST-final
