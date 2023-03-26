@@ -142,8 +142,7 @@ The templates related to this post are located at:
 bastille bootstrap https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips
 ~~~
 
-lets check out the 'default-configs' template. This is where we will setup general settings
-for all of our jails.
+Lets check out the 'default-configs' template, these settings will apply to all of our jails.
 ~~~
 cd /usr/local/bastille/templates/adriel-tech/FreeBSD13-BastilleBSD-Tips
 ~~~
@@ -204,17 +203,17 @@ CMD touch /root/"Created_`date +"%m_%d_%Y"`"
 ~~~
 
 What did we see?
-- hosts resolvconf.conf copied to jail.
-- mount host /var/cache/pkg.
-- root user home directory setup + dots #1.
-- sysrc tweaks.
-- pkg set to use latest instead of quarterly (latest packages).
-- install must have programs: "git-lite htop neovim tree xstow".
-- give root a default password "CHANGEME".
-- root user home directory setup + dots #2.
-- overlay my custom /etc/ files to overwrite FreeBSD defaults.
-- nuke the logs.
-- create a file in /root so I know the creation date of the jail.
+- Hosts resolvconf.conf copied to jail.
+- Mount host /var/cache/pkg.
+- Root user home directory setup + dots #1.
+- Sysrc tweaks.
+- Pkg set to use latest instead of quarterly (latest packages).
+- Install must have programs: "git-lite htop neovim tree xstow".
+- Give root a default password "CHANGEME".
+- Root user home directory setup + dots #2.
+- Overlay my custom /etc/ files to overwrite FreeBSD defaults.
+- Nuke the logs.
+- Create a file in /root so I know the creation date of the jail.
 
 My 'default-configs' template changes some default FreeBSD settings to reduce cpu workload and writes to disk.
 
@@ -298,7 +297,7 @@ CMD printf '####\n#### Setup: Post commands\n####\n'
 
 Now let us build up our nginx-TEST-setup Bastillefile. I want this jail to be a VNET jail with IPv6 and a
 default PF firewall enabled. I include the 'default-configs' of course, also 2 'snippet' Bastillefiles
-that will enable ipv6 and enable pf with a basic pf.conf. 
+that will enable ipv6 and pf with a basic pf.conf. 
 
 ~~~
 CMD printf '####\n#### Setup: Defaults\n####\n'
@@ -349,7 +348,7 @@ mkdir -p /usr/local/jails/nginx-TEST/ule-nginx
 
 # Building jails
 
-We'll create the jail with Bastille, then activate the templates. This is considered a new project that needs
+Create the jail with Bastille, then activate the templates. This is considered a new project that needs
 some other setup. Once the jail is built and setup we will pop inside, customize what we want and play a bit.
 
 Create VNET jail:
