@@ -142,6 +142,8 @@ The templates related to this post are located at:
 bastille bootstrap https://github.com/adriel-tech/FreeBSD13-BastilleBSD-Tips
 ~~~
 
+## Modify templates
+
 Lets check out the 'default-configs' template, these settings will apply to all of our jails.
 ~~~
 cd /usr/local/bastille/templates/adriel-tech/FreeBSD13-BastilleBSD-Tips
@@ -415,6 +417,8 @@ If your template fails, you'll need to troubleshoot it, stop, destroy jail then 
 You kept the original nginx-TEST-setup jail, you can also compare your work with it.
 Assuming the template works without issue, you are done.
 
+## Update Jails
+
 You can update the jail in the future from the host by running:
 ~~~
 bastille cmd nginx-TEST-final pkg upgrade -y
@@ -430,3 +434,11 @@ bastille template nginx-TEST-final adriel-tech/FreeBSD13-BastilleBSD-Tips/nginx-
 
 # Conclusion and thoughts
 
+I don't usually create 2 templates '-setup' and '-final', I used them as a tool to explain things better.
+Integrate your own snippets for simple generic things to save time. You could disable syslogd and cron for your jails,
+which makes sense for some and not others. Make a snippet and add it to the jails that don't need it. Once you
+create your own defaults and build up 1-2 services using what you learned from this post, you'll
+understand the power of it. 
+
+I hope you learned from this post and generated some ideas that will improve your
+own setup, please share them with the community!
