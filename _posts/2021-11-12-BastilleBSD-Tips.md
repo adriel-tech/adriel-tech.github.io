@@ -10,6 +10,8 @@ is installed and setup. I write this to share my ideas with others familiar with
 modification. BastilleBSD can be simple or difficult depending on what you want to do or HOW you do it.
 I have found that most examples for BastilleBSD are very basic, that is why I am writing this guide.
 
+<p align="center" width="100%">
+
 [1. Preamble](#preamble)
 
 [2. Host settings](#host-settings)
@@ -20,6 +22,7 @@ I have found that most examples for BastilleBSD are very basic, that is why I am
 
 [5. Conclusion & thoughts](#conclusion-and-thoughts)
 
+</p>
 ---
 
 # Preamble
