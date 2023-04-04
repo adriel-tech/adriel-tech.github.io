@@ -203,11 +203,8 @@ CMD printf '####\n#### Setup: Post commands\n####\n'
 CMD touch /root/"Created_`date +"%m_%d_%Y"`"
 ~~~
 
-![kid with glasses](/assets/images/posts/2021-11-12-BastilleBSD-Tips/what-is-this.gif)
-
-
 <p align="center" width="100%">
-    <img width="33%" src="/assets/images/posts/2021-11-12-BastilleBSD-Tips/what-is-this.gif"> 
+    <img src="/assets/images/posts/2021-11-12-BastilleBSD-Tips/what-is-this.gif"> 
 </p>
 
 What did we see?
