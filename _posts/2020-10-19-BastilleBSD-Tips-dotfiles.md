@@ -101,4 +101,4 @@ This can also be used for non root users.
 This is the basics of how I use Git + xstow to share '.dotfiles' across jails. In the future
 I will share my 'modern' setup which includes these ideas + a modified default jail template.
 If this was useful to you, you have a better system or you hate what I have done here...
-[let me know.] (https://adriel-tech.github.io/contact)
+[let me know.](https://adriel-tech.github.io/contact)
