@@ -26,13 +26,12 @@ I have found that most examples for BastilleBSD are very basic, that is why I am
 
 The flow of my bastille system is as such:
 
-1. Dial in the default-config template for a consistent base jail setup.
-Install your important programs and settings so everything is as you like.
-Include default-config template in all of your Bastillefiles. We do not edit
-BastilleBSDs default template, it easily causes problems. This default-config is
-overlayed over BastilleBSDs default settings.
+1. Customize a 'default-config' template for a consistent jail setup.
+Include 'default-config' template in all of your Bastillefiles. Do not edit
+BastilleBSDs default template, it easily causes problems. Our 'default-config' will
+overlay BastilleBSDs default settings.
 
-2. Copy the template, modify template, build a jail, apply template.
+2. Copy our template, modify template, build a jail, apply template.
 
 3. Enter new jail, fine tune the setup and modify it to your liking.
 
@@ -203,6 +202,8 @@ CMD printf '####\n#### Setup: Post commands\n####\n'
 # Date the Jails creation
 CMD touch /root/"Created_`date +"%m_%d_%Y"`"
 ~~~
+
+![kid with glasses](/assets/images/posts/2021-11-12-BastilleBSD-Tips/what-is-this.gif)
 
 What did we see?
 - Hosts resolvconf.conf copied to jail.
