@@ -19,3 +19,11 @@ img.centered {
   color: white;
   text-transform: uppercase;
 }
+
+.site-title::before {
+  content: url("/assets/images/header-logo.png");
+  display: inline-block;
+  position: relative;
+  width: 69px;
+  height: 60px;
+  }
