@@ -15,7 +15,7 @@ img.centered {
 }
 
 .site-title {
-  font-weight: 600;
+  font-size: 40px;
   color: white;
   text-transform: uppercase;
 }
@@ -24,6 +24,6 @@ img.centered {
   content: url("/assets/images/header-logo.png");
   display: inline-block;
   position: relative;
-  width: 69px;
-  height: 60px;
-  }
+  margin-top: 5px;
+  margin-right: 15px;
+}
