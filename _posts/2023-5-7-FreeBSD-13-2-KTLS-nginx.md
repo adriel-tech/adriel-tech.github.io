@@ -1,0 +1,71 @@
+---
+layout: post
+title: "FreeBSD 13.2 - enable Kernel TLS for nginx"
+categories: [FreeBSD13, nginx]
+---
+
+This is how to enable Kernel TLS on FreeBSD 13.2 for use with nginx.
+This article assumes you already use nginx and you generally know how
+to use FreeBSD.
+
+## Load the ktls kernel module.
+
+~~~
+# kldload ktls_ocf
+~~~
+
+## Add required rc.conf settings to load module at boot.
+
+~~~
+# sysrc kld_list="ktls_ocf"
+~~~
+
+Note: The above 2 steps are only needed for FreeBSD 13, it will not be required for FreeBSD 14.
+
+## Enable ktls sysctl
+
+~~~
+# sysctl kern.ipc.tls.enable=1
+~~~
+
+## Add required sysctl.conf settings to enable at boot.
+
+~~~
+echo "kern.ipc.tls.enable=1" >> /etc/sysctl.conf
+~~~
+
+## Edit nginx configuration
+
+make sure sendfile is on.
+
+/usr/local/etc/nginx.conf
+~~~
+http {
+    sendfile on;
+}
+~~~
+
+add the following lines into your nginx configurations server blocks.
+
+/usr/local/etc/nginx.conf
+~~~
+server {
+    ssl_conf_command Options KTLS;
+    ssl_protocols TLSv1.3;
+}
+~~~
+
+## Restart nginx
+
+~~~
+# service nginx restart
+~~~
+
+## View ktls stats
+
+~~~
+# sysctl kern.ipc.tls.stats
+~~~
+
+## Resources
+https://www.nginx.com/blog/improving-nginx-performance-with-kernel-tls/
