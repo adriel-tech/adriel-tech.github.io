@@ -4,7 +4,14 @@ title: "FreeBSD 14 - enable Kernel TLS for nginx"
 tags: [FreeBSD14, nginx]
 ---
 
-{% raw %} {% if page.tags.size > 0 %} {% for tagName in page.tags %} {% capture tags_content %}{{ tags_content }} <a href='/tags?tagName={{ tagName }}'><i class='glyphicon glyphicon-tag'></i>{{ tagName }}</a> {% endcapture %} {% endfor %} {% else %} {% assign tags_content = '' %} {% endif %} {{ tags_content }} {% endraw %}
+<ul style='padding-top: 16px;'>
+
+{% for post in site.posts %}
+    {% if post.tags contains page.tag-name %}
+    <li><a href="{{ post.url }}">{{ post.title }}</a>, published {{ post.date | date: "%Y-%m-%d" }}</li>
+    {% endif %}
+{% endfor %}
+</ul>
 
 This is how to enable Kernel TLS on FreeBSD 14 for use with nginx.
 This article assumes you already use nginx and you generally know how
