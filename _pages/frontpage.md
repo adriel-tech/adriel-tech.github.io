@@ -1,7 +1,7 @@
 ---
 permalink: /
 layout: home
-title: Home
+title:
 list_title: Latest posts ⬇️
 ---
 
