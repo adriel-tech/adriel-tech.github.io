@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "FreeBSD 13 BastilleBSD Tips"
+title: "FreeBSD 13 - BastilleBSD Tips"
 categories: [BastilleBSD, FreeBSD13]
 ---
 
