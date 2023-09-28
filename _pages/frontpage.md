@@ -1,6 +1,6 @@
 ---
 permalink: /
-layout: home
+layout: custom-home
 title: Home
 list_title: Latest posts ⬇️
 ---
