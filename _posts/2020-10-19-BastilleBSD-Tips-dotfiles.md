@@ -19,12 +19,12 @@ jails.
 
 # Preamble
 
-I mount my '.dotfiles' for jails in a shared folder (/usr/local/jails/share). This allows me to update my userland
+I mount my 'dotfiles' for jails in a shared folder (/usr/local/jails/share). This allows me to update my userland
 configs across all jails with a single git pull. After looking through my setup I am sure you could incorporate
-any other '.dotfile' system you prefer. You could bypass this whole idea and place your jail '.dotfiles' in each of
+any other 'dotfile' system you prefer. You could bypass this whole idea and place your jail 'dotfiles' in each of
 your Bastille templates. That is a simple solution but it scales poorly once you have a handful of jails.
-If you are often tweaking your '.dotfiles' and [TUI](https://github.com/rothgar/awesome-tuis), Git + Xstow allows your latest
-changes to be updated across all your jails easily, keeping your tui consistent across your jails and host.
+If you are often tweaking your 'dotfiles' and [TUI](https://github.com/rothgar/awesome-tuis), Git + Xstow allows your latest
+changes to be updated across all your jails easily, keeping your TUI consistent across your jails and host.
 
 # Host setup
 
