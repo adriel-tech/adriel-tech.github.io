@@ -5,4 +5,4 @@ title: Home
 list_title: Latest posts ⬇️
 ---
 
-![placeholder](/assets/images/frontpage.png){:.centered}
+![adriel-logo](/assets/images/frontpage.png){:.centered}
