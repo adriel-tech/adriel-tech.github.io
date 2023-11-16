@@ -4,7 +4,7 @@ title: "FreeBSD 14 - remove deprecated /usr/home > /home symlink"
 categories: [FreeBSD14]
 ---
 
-Freebsd 14 was released with [this commit] (https://cgit.freebsd.org/src/commit/?id=bbb2d2ce4220).
+Freebsd 14 was released with [this commit.] (https://cgit.freebsd.org/src/commit/?id=bbb2d2ce4220)
 In the past users home directories were placed in /usr/home with a symlink to /home.
 Freebsd 14+ will return to using /home directly, this is great. Over the years I have
 bumped into minor issues with programs due to the /usr/home diretory [broot] (https://github.com/Canop/broot)
