@@ -82,15 +82,11 @@ INCLUDE /usr/local/bastille/templates/MY-TEMPLATES/snippet-dots
     <img src="/assets/images/posts/2020-10-19-BastilleBSD-Tips-dotfiles/blocks7.png"> 
 </p>
 
-Now when we build a new jail, our shared 'dotfiles' will be mounted
+Now if we build a new jail, our shared 'dotfiles' will be mounted
 read only in each jails /root/.dotfiles. If you make changes to your 'dotfiles'
 on the host or pull in remote changes, the updates will hit all configs across your jails.
 If you find a new TUI-TOOL and want to integrate it, edit "snippet-dots/Bastillefile"
 and rebuild the jail. Or use bastille cmd to install the app and manually use xstow.
-~~~
-bastille cmd ALL pkg instll -y TUI-TOOL
-bastille cmd ALL xstow -d /root/.dotfiles TUI-TOOL
-~~~
 
 Assuming your new TUI-TOOL configs are already in /usr/local/jails/share/dotfiles
 ~~~
