@@ -1,10 +1,8 @@
 ---
 layout: post
-title: "FreeBSD 13 - use a live CD & zfs to swap from HDD mirror to SSD mirror"
+title: "FreeBSD 13.X - Use live CD & zfs to swap HDD mirror to SSD mirror"
 categories: [FreeBSD13, ZFS]
 ---
-
-## Goal/Purpose
 
 WARNING: This is a general guide I made while doing this task, don't follow this blindly.
 I hope the general information will help you accomplish a similar task.
@@ -15,34 +13,37 @@ the new SSD ZFS mirror, transfer the original servers ZFS mirror over the networ
 SSD ZFS mirror, replace the HDD mirror in the server with the new SSD mirror. Keeping the old
 HDD mirror as a physical backup while I am at it.
 
-[1. Spare PC: Install and setup](#Spare PC: Install and setup)
+[1. Spare PC: Install and setup](#1. Spare PC: Install and Setup)
 
-[2. Spare PC: LiveCD](#Spare PC: LiveCD)
+[2. Spare PC: live CD](#2. Spare PC: live CD)
 
 [3. Server](#3. Server)
 
-[4. Finish up Server](4. Finish up Server)
+[4. Finish up Server](#4. Finish up Server)
  
-### 1. Spare PC
-- Use a FreeBSD live CD
-  - install onto new ssd mirror
-### 2. Spare PC
-- reboot to livecd. 
-  - make /tmp/zroot2
-  - mount mirror to zroot2
-  - allow root to ssh
-  - start sshd
-### 3. Server
-- Stop all services
-- Snapshot zroot
-- ZFS Send zroot to Spare PC
-- Set zfs boot
-- Edit Spare PC /tmp/zroot2/etc/fstab and remove SWAP if required.
-- Power off
-### 4. Server
-- Replace HDD mirror with new SSDs
-- UEFI: change boot to SSD mirror
-- Boot working system 🤞
+1. Spare PC
+  - Use a FreeBSD live CD
+    - install onto new ssd mirror
+
+2. Spare PC
+  - reboot to live CD. 
+    - make /tmp/zroot2
+    - mount mirror to zroot2
+    - allow root to ssh
+    - start sshd
+
+3. Server
+  - Stop all services
+  - Snapshot zroot
+  - ZFS Send zroot to Spare PC
+  - Set zfs boot
+  - Edit Spare PC /tmp/zroot2/etc/fstab and remove SWAP if required.
+  - Power off
+
+4. Server
+  - Replace HDD mirror with new SSDs
+  - UEFI: change boot to SSD mirror
+  - Boot working system 🤞
 
 # 1. Spare PC: Install and Setup
 
@@ -51,9 +52,9 @@ Install your new SSDs into a spare computer, boot from an install disk.
 Install Freebsd with a zfs mirror, you don't need to adjust anything else all your
 settings will be brought over from your HDD raid on the server.
 
-# 2. Spare PC: LiveCD
+# 2. Spare PC: live CD
 
-Reboot your fresh install back to the liveCD. Make a new temporary directory for the zroot mirror
+Reboot your fresh install back to the live CD. Make a new temporary directory for the zroot mirror
 you created in the previous step, then import it.
 ~~~
 mkdir /tmp/zroot2
