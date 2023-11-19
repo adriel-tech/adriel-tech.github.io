@@ -70,7 +70,7 @@ CMD xstow -d /root/.dotfiles tcsh-root
 What did we just look at?
 - Made some needed folders for roots home directory.
 - Mount hosts shared 'dotfiles' into jail /root/.dotfiles as READ ONLY.
-- Install must have programs: "git-lite htop neovim tree xstow".
+- Install programs: "git-lite, htop, neovim, tree, xstow".
 - Use xstow to enable our 'dotfiles' 'bin-files, git, nvim, tcsh'
 
 We can include the above snippet at the top of all our Bastillefiles.
@@ -85,9 +85,12 @@ INCLUDE /usr/local/bastille/templates/MY-TEMPLATES/snippet-dots
 Now when we build a new jail, our shared 'dotfiles' will be mounted
 read only in each jails /root/.dotfiles. If you make changes to your 'dotfiles'
 on the host or pull in remote changes, the updates will hit all configs across your jails.
-If you find a new TUI-TOOL and want to integrate it, just edit "snippet-dots/Bastillefile"
-and rebuild the jail. You could also use bastille to install the app and manually use xstow,
-if you don't want to rebuild.
+If you find a new TUI-TOOL and want to integrate it, edit "snippet-dots/Bastillefile"
+and rebuild the jail. Or use bastille cmd to install the app and manually use xstow.
+~~~
+bastille cmd ALL pkg instll -y TUI-TOOL
+bastille cmd ALL xstow -d /root/.dotfiles TUI-TOOL
+~~~
 
 Assuming your new TUI-TOOL configs are already in /usr/local/jails/share/dotfiles
 ~~~
