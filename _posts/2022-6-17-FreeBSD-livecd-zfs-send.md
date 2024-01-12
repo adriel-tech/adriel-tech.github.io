@@ -4,7 +4,7 @@ title: "FreeBSD 13.X - Use live CD & zfs to swap HDD mirror to SSD mirror"
 categories: [FreeBSD13, ZFS]
 ---
 
-WARNING: This is a general guide I made while doing this task, don't follow this blindly.
+🚨 WARNING: This is a general guide I made while doing this task, don't follow this blindly.
 I hope the general information will help you accomplish a similar task.
 
 This is how I converted a server with a limited number of sata ports from a HDD mirror
@@ -74,18 +74,12 @@ zfs send -R zroot@mvssd2 | ssh root@SPAREPCip zfs recv -F zroot
 ssh root@SPAREPCip "zpool set bootfs=zroot/ROOT/default zroot"
 ~~~
 
-~~~
-!!!
-~~~
-Before powering down: Comment out swap in /tmp/zroot2/etc/fstab because my SSD doesn't
+🚨Before powering down: Comment out swap in /tmp/zroot2/etc/fstab because my SSD doesn't
 have swap partition. If you kept a swap partition when you installed FreeBSD on the SSDs
-you can just poweroff the spare pc.
+you can just poweroff the spare pc.🚨
 
 ~~~
 ssh root@SPAREPCip "poweroff"
-~~~
-~~~
-!!!
 ~~~
 
 # 4. Finish up Server {#id-4}

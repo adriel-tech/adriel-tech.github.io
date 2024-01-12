@@ -48,7 +48,6 @@ Enable ntpd.
 ~~~
 sysrc ntpd_enable="YES"
 sysrc ntpd_sync_on_start="YES"
-sysrc ntpdate_enable="YES"
 ~~~
 
 Enable powerd++ and set cpu c-states.
@@ -112,4 +111,10 @@ echo 'tmpfs           /var/log/RAM tmpfs rw,size=250m,late 0 0' >> /etc/fstab
 /var/log/RAM/ppp.log  root:network   640   0      5000  *      C
 /var/log/RAM/sendmail.st             640   0      5000  *      CBN
 /var/log/RAM/xferlog                 600   0      5000  *      C
+~~~
+
+Delete logs and restart newsyslog
+~~~
+rm -rfv /var/log/*
+service newsyslog restart
 ~~~
