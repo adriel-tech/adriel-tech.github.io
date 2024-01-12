@@ -1,7 +1,7 @@
-title: "Adriel's Speakeasy"
+title: "Adriel Tech"
 author:
   name: Adriel
-description: "This is my FreeBSD, Linux and other IT guides dumping ground."
+description: "This is my FreeBSD, Linux and other IT guide dumping ground."
 
 remote_theme: jekyll/minima
 plugins:

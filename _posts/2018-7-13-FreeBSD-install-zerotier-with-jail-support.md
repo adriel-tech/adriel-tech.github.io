@@ -49,7 +49,7 @@ zerotier-cli join YOURnetworkID
 Go back to [https://www.zerotier.com/](https://www.zerotier.com/) and you should see
 your device in the network. You need to allow it from the webui and then it is connected.
 
-## Allow zerotier in jails
+## Allow Zerotier in jails
 
 Zerotier can only work in VNET jails which were enabled by default sometime in FreeBSD 12.
 On your FreeBSD host you will need to add some devfs rules to allow the jails to interact with
