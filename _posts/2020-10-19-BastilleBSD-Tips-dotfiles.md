@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "FreeBSD 12.X - BastilleBSD, dotfiles using xstow"
+title: "FreeBSD 12 - BastilleBSD, dotfiles using xstow"
 categories: [BastilleBSD, dotfiles, FreeBSD12]
 ---
 

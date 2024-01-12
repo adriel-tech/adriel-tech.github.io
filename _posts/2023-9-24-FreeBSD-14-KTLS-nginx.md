@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "FreeBSD 14.X - Enable Kernel TLS for nginx"
+title: "FreeBSD 14 - Enable Kernel TLS for nginx"
 categories: [FreeBSD14, nginx]
 ---
 

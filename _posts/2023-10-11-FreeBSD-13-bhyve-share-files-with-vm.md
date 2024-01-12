@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "FreeBSD 13.X - Bhyve share host files with VMs"
+title: "FreeBSD 13 - Bhyve share host files with VMs"
 categories: [Bhyve, Bhyve, NixOS, VM]
 ---
 

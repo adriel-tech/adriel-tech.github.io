@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "FreeBSD 13.X - Use live CD & zfs to swap HDD mirror to SSD mirror"
+title: "FreeBSD 13 - Use live CD & zfs to swap HDD mirror to SSD mirror"
 categories: [FreeBSD13, ZFS]
 ---
 
