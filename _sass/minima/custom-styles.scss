@@ -17,12 +17,12 @@ img.centered {
 .site-header {
   border-top: 8px solid #222222;
   border-bottom: 5px solid #de1a99;
-  background-color: #27282be8;
+  background-color: #27282bce;
 
   &::after {
     position: absolute;
     content: "";
-    top: 8px;
+    top: 9px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -57,7 +57,7 @@ img.centered {
 }
 
 .site-title {
-  font-size: 40px;
+  font-size: 2.5em;
   text-transform: uppercase;
 }
 
@@ -74,7 +74,7 @@ img.centered {
 h1.post-list-heading {
   font-family: 'Mr Dafoe';
   z-index: 1;
-  font-size: 80px;
+  font-size: 5em;
   margin-top: -1.5em;
   opacity: 0.9;
   color: white;
