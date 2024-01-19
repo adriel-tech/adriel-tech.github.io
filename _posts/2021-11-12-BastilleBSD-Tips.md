@@ -4,7 +4,7 @@ title: "FreeBSD 13 - BastilleBSD Tips"
 categories: [BastilleBSD, FreeBSD13]
 ---
 
-These are a few tricks I use for [BastilleBSD](https://bastillebsd.org/) on FreeBSD 13 to create persistent jails. This document assumes you
+These are a few tricks I use for [BastilleBSD](https://bastillebsd.org/){:target="_blank"} on FreeBSD 13 to create persistent jails. This document assumes you
 have a pc/server on your home lan, you want to use IPv6 which has dynamic addresses and BastilleBSD
 is installed and setup. I write this to share my ideas with others familiar with FreeBSD, nothing is to be used without
 modification. BastilleBSD can be simple or difficult depending on what you want to do or HOW you do it.
@@ -45,7 +45,7 @@ update the template.
 Other stuff:
 
 - I mount my '.dotfiles' for jails in a shared folder. This allows a simple way to update userland
-configs across all jails. I use [Xstow](https://www.freshports.org/sysutils/xstow/) to manage all 
+configs across all jails. I use [Xstow](https://www.freshports.org/sysutils/xstow/){:target="_blank"} to manage all 
 of my '.dotfiles', this is specific to my personal setup, you can easily integrate your own
 '.dotfiles' system. You could also bypass this whole idea and place your jail '.dotfiles' in the 'default-config'
 template. That is simple but if you are always tweaking your '.dotfiles' and setup, this allows your latest

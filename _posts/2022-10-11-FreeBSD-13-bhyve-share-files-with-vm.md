@@ -11,7 +11,7 @@ to do this for Windows, you are on your own 🫡.
 
 ## On your FreeBSD host
 
-I use [vm-bhyve](https://github.com/churchers/vm-bhyve) to manage my VMs but
+I use [vm-bhyve](https://github.com/churchers/vm-bhyve){:target="_blank"} to manage my VMs but
 it is not required for this to work, we are manually adding our shares without vm-bhyves
 help.
 

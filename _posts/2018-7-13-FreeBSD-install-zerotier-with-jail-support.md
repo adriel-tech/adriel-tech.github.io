@@ -4,13 +4,13 @@ title: "FreeBSD - Zerotier mesh network with jail support"
 categories: [FreeBSD]
 ---
 
-[Zerotier](https://www.zerotier.com/) is a mesh vpn network which allows you to connect
+[Zerotier](https://www.zerotier.com){:target="_blank"} is a mesh vpn network which allows you to connect
 your computers/servers/devices in a private network. It is incredibly useful and really cool technology.
 Installing and using it is simple enough, it even works inside jails with a few extra steps.
 
 ## Make a Zerotier account
 
-Go to [https://www.zerotier.com/](https://www.zerotier.com/) and create an account.
+Go to [https://www.zerotier.com/](https://www.zerotier.com){:target="_blank"} and create an account.
 The next step is to create a network, you will need the network ID to join
 your FreeBSD server to the network later on.
 
@@ -46,7 +46,7 @@ zerotier-cli join YOURnetworkID
 
 ## Accept device from webmin
 
-Go back to [https://www.zerotier.com/](https://www.zerotier.com/) and you should see
+Go back to [https://www.zerotier.com/](https://www.zerotier.com){:target="_blank"} and you should see
 your device in the network. You need to allow it from the webui and then it is connected.
 
 ## Allow Zerotier in jails

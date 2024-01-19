@@ -4,7 +4,7 @@ title: "FreeBSD 12 - BastilleBSD, dotfiles using xstow"
 categories: [BastilleBSD, dotfiles, FreeBSD12]
 ---
 
-This how I use Git and [Xstow](https://www.freshports.org/sysutils/xstow) to manage my dotfiles across [BastilleBSD](https://bastillebsd.org)
+This how I use Git and [Xstow](https://www.freshports.org/sysutils/xstow){:target="_blank"} to manage my dotfiles across [BastilleBSD](https://bastillebsd.org){:target="_blank"}
 jails.
 
 [1. Preamble](#preamble)
@@ -23,7 +23,7 @@ I mount my 'dotfiles' for jails in a shared folder (/usr/local/jails/share). Thi
 configs across all jails with a single git pull. After looking through my setup I am sure you could incorporate
 any other 'dotfile' system you prefer. You could bypass this whole idea and place your jail 'dotfiles' in each of
 your Bastille templates. That is a simple solution but it scales poorly once you have a handful of jails.
-If you are often tweaking your 'dotfiles' and [TUI](https://github.com/rothgar/awesome-tuis), Git + Xstow allows your latest
+If you are often tweaking your 'dotfiles' and [TUI](https://github.com/rothgar/awesome-tuis){:target="_blank"}, Git + Xstow allows your latest
 changes to be updated across all your jails easily, keeping your TUI consistent across your jails and host.
 
 # Host setup
@@ -100,4 +100,4 @@ This can also be used for non root users.
 This is the basics of how I use Git + xstow to share 'dotfiles' across jails. In the future
 I will share my 'modern' setup which includes these ideas + a modified default jail template.
 If this was useful to you, you have a better system or you hate what I have done here...
-[let me know.](https://adriel-tech.github.io/contact)
+[let me know.](https://adriel-tech.github.io/contact){:target="_blank"}
