@@ -22,7 +22,7 @@ img.centered {
   &::after {
     position: absolute;
     content: "";
-    top: 9px;
+    top: 10px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -57,7 +57,9 @@ img.centered {
 }
 
 .site-title {
-  font-size: clamp(2.2rem, 3vw, 3.8rem);
+  font-size: clamp(2.0rem, 4.0vw, 5.8rem);
+  font-weight: 280;
+  letter-spacing: -3px;
   text-transform: uppercase;
 }
 
