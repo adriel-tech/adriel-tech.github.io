@@ -17,10 +17,9 @@ layout: base
     {%- if page.list_title -%}
       <h1 class="post-list-heading">{{ page.list_title }}</h1>
     {%- endif -%}
-    <ul class="post-list box">
+    <ul class="post-list">
       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
       {%- for post in posts -%}
-      <div class="post-box">
       <li>
         <span class="post-meta">{{ post.date | date: date_format }}</span>
         <h3>
@@ -32,7 +31,6 @@ layout: base
           {{ post.excerpt }}
         {%- endif -%}
       </li>
-    </div>
       {%- endfor -%}
     </ul>
 
