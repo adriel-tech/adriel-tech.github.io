@@ -4,6 +4,10 @@ img.centered {
   margin-right: auto;
 }
 
+.highlight{
+  box-shadow: 0px 3px 0px 0px rgb(255, 0, 87);
+}
+
 .image-caption {
   text-align: center;
   font-size: .8rem;
@@ -12,6 +16,14 @@ img.centered {
 
 .text-align-center {
   text-align: center;
+}
+
+a.post-link {
+  text-decoration-color: #e084d6;
+}
+
+a:hover.post-link {
+  color: #79b8ff;
 }
 
 .site-header {
@@ -57,10 +69,14 @@ img.centered {
 }
 
 .site-title {
-  font-size: clamp(2.0rem, 3.2vw, 5.8rem);
+  font-size: clamp(2.0rem, 3.2vw, 5.5rem);
   font-weight: 280;
   letter-spacing: -3px;
   text-transform: uppercase;
+}
+
+a.site-title {
+  text-decoration: none;
 }
 
 .site-title::before {
@@ -82,4 +98,19 @@ h1.post-list-heading {
   text-align: center;
   text-shadow: 0 0 0.05em #fff, 0 0 0.2em #fe05e1, 0 0 0.3em #fe05e1;
   transform: rotate(-9deg);
+}
+
+h1.post-title {
+  font-family: 'Mr Dafoe';
+  font-size: clamp(2rem, 4vw, 4rem);
+  opacity: 0.9;
+  color: white;
+  text-shadow: 0 0 0.05em #e6e6e6, 0 0 0.2em #fa2ce2, 0 0 0.3em #fa2ce2;
+}
+
+h1.p-name {;
+  font-family: "Segoe UI", "Segoe UI Emoji", "Segoe UI Symbol", "Apple Color Emoji", Roboto, Helvetica, Arial, sans-serif;
+  font-size: clamp(1rem, 2vw, 2rem);
+  color: white;
+  text-shadow: 0 0 0.01em #fff, 0 0 0.1em #fe05e1, 0 0 0.1em #fe05e1;
 }
