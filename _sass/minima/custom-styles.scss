@@ -5,7 +5,7 @@ img.centered {
 }
 
 .highlight{
-  box-shadow: 0px 3px 0px 0px rgb(255, 0, 87);
+  box-shadow: 0px 3px 0px 0px #e74078;
 }
 
 .image-caption {
@@ -19,11 +19,16 @@ img.centered {
 }
 
 a.post-link {
-  text-decoration-color: #e084d6;
-}
+  text-decoration-color: #ff744e;
+} 
 
 a:hover.post-link {
   color: #79b8ff;
+}
+
+a:hover{
+  color: #79b8ff;
+  text-decoration-color: #ff1a8f;
 }
 
 .site-header {
@@ -108,9 +113,15 @@ h1.post-title {
   text-shadow: 0 0 0.05em #e6e6e6, 0 0 0.2em #fa2ce2, 0 0 0.3em #fa2ce2;
 }
 
-h1.p-name {;
+h1.p-name {
   font-family: "Segoe UI", "Segoe UI Emoji", "Segoe UI Symbol", "Apple Color Emoji", Roboto, Helvetica, Arial, sans-serif;
   font-size: clamp(1rem, 2vw, 2rem);
   color: white;
   text-shadow: 0 0 0.01em #fff, 0 0 0.1em #fe05e1, 0 0 0.1em #fe05e1;
+}
+
+.site-footer {
+  border-top: 8px solid #222222;
+  border-bottom: 5px solid #de1a99;
+  background-color: #27282bce;
 }
