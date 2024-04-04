@@ -40,6 +40,10 @@ as question during adding a user, "Use old FreeBSD shell defaults or the new hip
 
 ### Shell
 
+- Automatically load ~/.shrc instead of requiring 'ENV=$HOME/.shrc; export ENV' in .profile, this is
+  especially annoying on root. We can add a simple 'if not interactive don't return' to the top of the
+  .shrc file like most .bashrc.
+
 - Add back FreeBSDs classic up/down arrow history navigation from tcsh to our default shell configuration.
 
 - Update the prompt with extra features & color.
