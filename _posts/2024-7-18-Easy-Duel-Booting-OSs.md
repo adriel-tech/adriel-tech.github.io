@@ -8,13 +8,13 @@ Duel booting is a common way to use or test different operating systems with you
 and hardware, it can be a real pain. In this post I will explain some basic rules to make it easier to duel boot
 and some useful commands.
 
-# My duel boot rules
+## My duel boot rules
 
-1. Never mix operating systems on the same hard drive. Keeping each OS on it's own hard drive with its own boot loader
+1️⃣ Never mix operating systems on the same hard drive. Keeping each OS on it's own hard drive with its own boot loader
 is less complicated and removes the issues with operating systems fighting over the boot loader. I have followed this
 rule since the days of Windows XP and I stick to it today.
 
-2. Use your UEFI to boot to different operating systems. You do not need a single boot loader modded to work with different
+2️⃣ Use your UEFI to boot to different operating systems. You do not need a single boot loader modded to work with different
 operating systems. You do not want a bootloader update to lock you out of one of your operating systems, requiring a recovery
 disk to modify the boot loader. Instead use your UEFI boot menu and choose what OS you want to boot into, this requires
 no setup, no extra configurations and no risk.
@@ -54,7 +54,7 @@ function reboot-uefi { shutdown /r /fw /t 0 }
 You can also search 'windows advanced startup' in the Windows start menu. It will take you to a UI which allows booting into your
 UEFI firmware or directly to another OS.
 
-3. Windows clock. I believe most people duel booting are using windows. Unlike FreeBSD and Linux, Windows
+3️⃣ Windows clock. I believe most people duel booting are using windows. Unlike FreeBSD and Linux, Windows
 uses an 'RTC' clock and not 'UTC'. If you duel boot Linux with its default settings and reboot back into windows
 your windows clock will be out to lunch and cause you some issues.
 
