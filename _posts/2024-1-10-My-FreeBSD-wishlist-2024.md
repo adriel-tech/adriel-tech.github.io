@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "My FreeBSD wish list 2024 edition"
-categories: [FreeBSD, musing]
+categories: [FreeBSD, Musing]
 ---
 
 This is a list of things I would like to see in FreeBSDs future.
@@ -41,7 +41,7 @@ as question during adding a user, "Use old FreeBSD shell defaults or the new hip
 ### Shell
 
 - Automatically load ~/.shrc instead of requiring 'ENV=$HOME/.shrc; export ENV' in .profile, this is
-  especially annoying on root. We can add a simple 'if not interactive don't return' to the top of the
+  especially annoying on root. We can add a simple 'if not interactive return' to the top of the
   .shrc file like most .bashrc.
 
 - Add back FreeBSDs classic up/down arrow history navigation from tcsh to our default shell configuration.
@@ -127,7 +127,7 @@ The installer could have a firewall section:
 Workstation would be block all in and let all out.
 Cloud would be block all in, let ssh through.
 
-Obviously this needs more effort and thought to make it easy, quick and understanble for users.
+Obviously this needs more effort and thought to make it easy, quick and understandable for users.
 We can't make everyone happy, that does not mean we can't have a few basic default options to get people started.
 Users can have a basic PF firewall auto setup for their cloud install and look through the handbook to learn how 
 to add more firewall features if needed.
@@ -142,7 +142,7 @@ That is great but it would be a really nice to have an official jail management 
 Users could install and use their favorite jail manager but we should have a more user friendly interface
 to access what the operating system already allows us to do. I know above I started with reducing the base OS but
 one of the selling points of FreeBSD is the complete OS being a comprehensive kernel and user land built together.
-Tighter user land intigration with cool kernel features is something we want across the board.
+Tighter user land integration with cool kernel features is something we want across the board.
 
 jailctl?
 
@@ -162,21 +162,21 @@ containers including jails and having to rip things out and disable parts of you
 is more annoying than adding what you need to a clean slate.
 
 I guess [pkgbase](https://wiki.freebsd.org/PkgBase){:target="_blank"} will help with this? I am thinking
-more in the direction of a container image 'FreeBSD-14-mini-contaier.img' that is stripped down
+more in the direction of a container image 'FreeBSD-14-mini-container.img' that is stripped down
 similar to other images FreeBSD already makes. Jails are powerful and plenty of times I want a full
 FreeBSD install in a VNET jail, this idea is an option for other use cases.
 
-## 4. Virtual machines (bhyve):
+## 4. Virtual machines (Bhyve):
 
 ### Default virtual machine userland tools
 
 Similar to jails, having something like [vm-bhyve](https://github.com/churchers/vm-bhyve){:target="_blank"} in the base system with a
-similar interface to the new jailctl system we added above. I have manually used bhyve in the past, it works but it would be preferable
+similar interface to the new jailctl system we added above. I have manually used Bhyve in the past, it works but it would be preferable
 to have a more user friendly interface. Users could still install and use their favorite VM manager.
 
 ### More robust file sharing with host
 
-I want something like NULLFS for jails but for bhyve, I assume [virtio-fs](https://virtio-fs.gitlab.io){:target="_blank"} support is the way to get that.
+I want something like NULLFS for jails but for Bhyve, I assume [virtio-fs](https://virtio-fs.gitlab.io){:target="_blank"} support is the way to get that.
 Bhyve currently supports virtio-9p which is [very useful.](https://adriel-tech.github.io/bhyve/nixos/vm/2022/10/11/FreeBSD-13-bhyve-share-files-with-vm.html){:target="_blank"}
 It has limitations that virtio-fs does not have and I think would be useful for FreeBSD. It would be wonderful to to easily host Windows or Linux
 virtual machines and store their important data on the hosts ZFS filesystem without issue or slowdown. I already use NixOS/Debian to run podman/docker

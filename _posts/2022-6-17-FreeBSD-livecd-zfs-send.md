@@ -76,7 +76,7 @@ ssh root@SPAREPCip "zpool set bootfs=zroot/ROOT/default zroot"
 
 🚨Before powering down: Comment out swap in /tmp/zroot2/etc/fstab because my SSD doesn't
 have swap partition. If you kept a swap partition when you installed FreeBSD on the SSDs
-you can just poweroff the spare pc.🚨
+you can just 'poweroff' the spare pc.🚨
 
 ~~~
 ssh root@SPAREPCip "poweroff"
