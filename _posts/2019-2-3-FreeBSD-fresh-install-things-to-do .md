@@ -29,7 +29,7 @@ cat > /usr/local/etc/pkg/repos/FreeBSD-latest.conf <<EOF
 FreeBSD: { enabled: no }
 
 FreeBSD-latest: {
-  url: "pkg+https://pkg.FreeBSD.org/${ABI}/latest",
+  url: "pkg+https://pkg.FreeBSD.org/\${ABI}/latest",
   mirror_type: "srv",
   signature_type: "fingerprints",
   fingerprints: "/usr/share/keys/pkg",
