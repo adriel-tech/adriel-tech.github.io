@@ -4,6 +4,8 @@ title: "FreeBSD - Things I do on a fresh install"
 categories: [FreeBSD]
 ---
 
+* Updated January 2025
+
 This is a general list of things I do and software I install on a fresh install of FreeBSD. 
 I will update this periodicly, currently this applies to FreeBSD 13 using ZFS. All commands
 assume you are root, use sudo/doas as needed.
@@ -13,8 +15,30 @@ assume you are root, use sudo/doas as needed.
 ## PKG
 
 Change to the "latest" PKG repository.
+
 ~~~
-sed -i .bak "s/quarterly/latest/g" /etc/pkg/FreeBSD.conf
+mkdir -p /usr/local/etc/pkg/repos/
+~~~
+
+~~~
+cat > /usr/local/etc/pkg/repos/FreeBSD-latest.conf <<EOF
+#
+# Override /etc/pkg/FreeBSD.conf to latest.
+#
+
+FreeBSD: { enabled: no }
+
+FreeBSD-latest: {
+  url: "pkg+https://pkg.FreeBSD.org/${ABI}/latest",
+  mirror_type: "srv",
+  signature_type: "fingerprints",
+  fingerprints: "/usr/share/keys/pkg",
+  enabled: yes
+}
+EOF
+~~~
+
+~~~
 pkg upgrade -y
 ~~~
 
